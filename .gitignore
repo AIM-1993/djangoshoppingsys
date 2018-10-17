@@ -1,0 +1,7 @@
+.vscode
+settings.py
+__pycache__
+manage.py
+migrations
+py3.7-django2.1.2/*
+db.sqlite3
