@@ -75,6 +75,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, verbose_name="品牌", on_delete="CASCADE")
     size = models.ManyToManyField(Size, verbose_name="尺寸大小")
     price = models.FloatField(default=0, verbose_name="原价")
+    newprice = models.FloatField(default=0, verbose_name="折扣价")
     discount = models.FloatField(default=0, verbose_name="折扣")
     sales = models.IntegerField(default=0, verbose_name="销量")
     desc = models.CharField(max_length=128, verbose_name="描述")
