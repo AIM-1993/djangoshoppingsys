@@ -23,6 +23,10 @@ def store(request):
     return render(request, "store.html", locals())
 
 
+def about(request):
+    return render(request, "about.html")
+
+
 def search(request):
     categories = Category.objects.filter(parent=None)
     if request.method == "POST":
@@ -30,4 +34,5 @@ def search(request):
         col_list = Product.objects.filter(name__contains=keyword)
         col_list = get_page(request, col_list)
         return render(request, "store.html", locals())
+
 
