@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Manager
 from mptt.models import MPTTModel
 from mptt.managers import TreeManager
+from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger 
 # Create your models here.
 
 class Category(MPTTModel):

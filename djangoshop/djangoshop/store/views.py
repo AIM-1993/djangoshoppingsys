@@ -1,7 +1,20 @@
 from django.shortcuts import render
 from django.conf import settings
 from .models import Product, Category
+from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger 
 # Create your views here.
+
+
+def get_page(request, product_list):
+    paginator = Paginator(product_list, 2)
+    try:
+        page = int(request.GET.get('page', 1))
+        product_list = paginator.page(page)
+    except (EmptyPage, PageNotAnInteger, InvalidPage):
+        product_list = paginator.page(1)
+    return product_list
+
+
 def index(request):
     categories_list = Category.objects.all()
     product_list = Product.objects.all()
@@ -25,6 +38,8 @@ def store(request):
 
 def about(request):
     return render(request, "about.html")
+
+
 
 
 def search(request):
