@@ -265,12 +265,34 @@
 						<!-- store bottom filter -->
 						<div class="store-filter clearfix">
 							<span class="store-qty">Showing 20-100 products</span>
-							<ul class="store-pagination">
-								<li class="active">1</li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+							<ul class="pagination store-pagination">
+                <li>
+                  {% if page_of_products.has_previous %}
+                    <a href="?page={{ page_of_products.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+                  {% else %}
+                    <i class="fa fa-angle-left"></i>
+                  {% endif %}
+                </li>
+
+                {% for page_num in page_range %}
+                  {% if page_num == page_of_products.number %}
+                    <li class="active">{{ page_num }}</li>
+                  {% else %}
+                    {% if page_num != '...' %}
+                      <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+                    {% else %}
+                      <li>{{ page_num }}</li>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+                <li>{{ page_num }}</li>
+                <li>
+                  {% if page_of_products.has_next %}
+                    <a href="?page={{ page_of_products.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                  {% else %}
+                    <i class="fa fa-angle-right"></i>
+                  {% endif %}
+                </li>
 							</ul>
 						</div>
 						<!-- /store bottom filter -->
