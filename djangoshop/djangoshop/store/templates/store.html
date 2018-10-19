@@ -30,7 +30,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#" class="logo">
+								<a href="{% url 'store:index' %}" class="logo">
 									<img src="{% static 'img/logo.png' %}" alt="">
 								</a>
 							</div>
@@ -139,7 +139,7 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
+						<li class="active"><a href="{% url 'store:index' %}">Home</a></li>
 						<li><a href="#">Hot Deals</a></li>
 						<li><a href="#">Categories</a></li>
 						<li><a href="#">Laptops</a></li>
@@ -165,7 +165,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
+							<li><a href="{% url 'store:index' %}">Home</a></li>
 							<li><a href="#">All Categories</a></li>
 							<li><a href="#">Accessories</a></li>
 							<li class="active">Headphones (227,490 Results)</li>
@@ -326,41 +326,21 @@
 						</div>
 						<!-- /aside Widget -->
 
-						<!-- aside Widget -->
+            <!-- aside Widget -->
 						<div class="aside">
-							<h3 class="aside-title">Top selling</h3>
+              <h3 class="aside-title">Top selling</h3>
+            {% for hot_product in hot_product_list %}
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="{% static 'img/product01.png' %}" alt="">
+                  <img class="img-responsive" src="{{ MEDIA_URL }}{{ hot_product.image.url }}" alt="">
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
-									<h3 class="product-name"><a href="#">product name goes here</a></h3>
-									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+									<h3 class="product-name"><a href="{% url 'store:product' %}">{{ hot_product.name }}</a></h3>
+									<h4 class="product-price">${{hot_product.newprice }} <del class="product-old-price">${{ hot_product.price }}</del></h4>
 								</div>
 							</div>
-
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="{% static 'img/product02.png' %}" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Category</p>
-									<h3 class="product-name"><a href="#">product name goes here</a></h3>
-									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								</div>
-							</div>
-
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="{% static 'img/product03.png' %}" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Category</p>
-									<h3 class="product-name"><a href="#">product name goes here</a></h3>
-									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								</div>
-							</div>
+            {% endfor %}
 						</div>
 						<!-- /aside Widget -->
 					</div>

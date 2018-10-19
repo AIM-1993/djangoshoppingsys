@@ -70,6 +70,16 @@ class Tag(models.Model):
         return self.name
 
 
+class NewProductManager(models.Manager):
+    def get_queryset(self):
+        return super(NewProductManager, self).get_queryset().filter(isnew=True)
+
+
+class HotProductManager(models.Manager):
+    def get_queryset(self):
+        return super(HotProductManager, self).get_queryset().filter(ishot=True)
+
+
 class Product(models.Model):
     name = models.CharField(max_length=128, verbose_name="名称")
     brand = models.ForeignKey(Brand, verbose_name="品牌", on_delete="CASCADE")
@@ -81,9 +91,15 @@ class Product(models.Model):
     desc = models.CharField(max_length=128, verbose_name="描述")
     tag = models.ManyToManyField(Tag, verbose_name="标签")
     num = models.IntegerField(default=0, verbose_name="库存")
+    isnew = models.BooleanField(default=False, verbose_name="是否新品")
+    ishot = models.BooleanField(default=False, verbose_name="是否热销")
     image = models.ImageField(upload_to="product/%Y%m", verbose_name="图片")
     categories = models.ManyToManyField(Category, verbose_name="分类")
     active = models.BooleanField(default=True, verbose_name="是否有效")
+
+    objects = Manager()
+    new_product = NewProductManager()
+    hot_product = HotProductManager()
 
     class Meta:
         verbose_name = "商品"
