@@ -3,6 +3,7 @@ from django.conf import settings
 from .models import Product, Category
 # Create your views here.
 def index(request):
+    categories_list = Category.objects.all()
     product_list = Product.objects.all()
     new_product_list = Product.new_product.all()
     hot_product_list = Product.hot_product.all()
@@ -15,6 +16,7 @@ def product(request):
 
 
 def store(request):
+    categories_list = Category.objects.all()
     product_list = Product.objects.all()
     new_product_list = Product.new_product.all()
     hot_product_list = Product.hot_product.all()
