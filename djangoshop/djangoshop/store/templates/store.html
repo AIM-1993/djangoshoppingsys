@@ -223,7 +223,7 @@
 
 						<!-- store products -->
 						<div class="row">
-              {% for product in product_list %}
+              {% for product in product_page.products %}
 							<!-- product -->
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
@@ -265,17 +265,17 @@
 						<!-- store bottom filter -->
 						<div class="store-filter clearfix">
 							<span class="store-qty">Showing 20-100 products</span>
-							<ul class="pagination store-pagination">
+							<ul class="store-pagination">
                 <li>
-                  {% if page_of_products.has_previous %}
-                    <a href="?page={{ page_of_products.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+                  {% if product_page.page_of_products.has_previous %}
+                    <a href="?page={{ product_page.page_of_products.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
                   {% else %}
                     <i class="fa fa-angle-left"></i>
                   {% endif %}
                 </li>
 
-                {% for page_num in page_range %}
-                  {% if page_num == page_of_products.number %}
+                {% for page_num in product_page.page_range %}
+                  {% if page_num == product_page.page_of_products.number %}
                     <li class="active">{{ page_num }}</li>
                   {% else %}
                     {% if page_num != '...' %}
@@ -285,10 +285,9 @@
                     {% endif %}
                   {% endif %}
                 {% endfor %}
-                <li>{{ page_num }}</li>
                 <li>
-                  {% if page_of_products.has_next %}
-                    <a href="?page={{ page_of_products.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                  {% if product_page.page_of_products.has_next %}
+                    <a href="?page={{ product_page.page_of_products.next_page_number }}"><i class="fa fa-angle-right"></i></a>
                   {% else %}
                     <i class="fa fa-angle-right"></i>
                   {% endif %}

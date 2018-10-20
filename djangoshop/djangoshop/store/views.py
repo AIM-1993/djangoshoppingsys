@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 
 
 def get_page(request, product_all_list):
-    paginator = Paginator(product_all_list, 3)
+    paginator = Paginator(product_all_list, 2)
 
     page_num = request.GET.get('page', 1)
     page_of_products = paginator.get_page(page_num)
@@ -20,7 +20,7 @@ def get_page(request, product_all_list):
         page_range.insert(0, 1) 
         
     context = {}
-    context['blogs'] = page_of_products.object_list
+    context['products'] = page_of_products.object_list
     context['page_of_products'] = page_of_products
     context['page_range'] = page_range
 
