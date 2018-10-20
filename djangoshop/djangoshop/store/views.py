@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from django.conf import settings
-from .models import Product, Category
+from django.shortcuts import render, HttpResponseRedirect
 from django.core.paginator import Paginator
+from .models import Product, Category
+from .forms import CheckoutForm
+
 # Create your views here.
 
 
@@ -18,7 +19,6 @@ def get_page(request, product_all_list):
         page_range.append("...")
     if page_range[0] != 1:
         page_range.insert(0, 1)
-        
     context = {}
     context['products'] = page_of_products.object_list
     context['page_of_products'] = page_of_products
@@ -51,7 +51,13 @@ def store(request):
 
 
 def checkout(request):
-    return render(request, "checkout.html")
+    if request.method == 'POST':
+        form = CheckoutForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/product/')
+    else:
+        form = CheckoutForm()
+    return render(request, "checkout.html", locals())
 
 
 def about(request):
@@ -65,5 +71,3 @@ def search(request):
         col_list = Product.objects.filter(name__contains=keyword)
         col_list = get_page(request, col_list)
         return render(request, "store.html", locals())
-
-

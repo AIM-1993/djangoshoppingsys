@@ -12,7 +12,7 @@
 					<div class="col-md-12">
 						<h3 class="breadcrumb-header">Checkout</h3>
 						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
+							<li><a href="{% url 'store:index' %}">Home</a></li>
 							<li class="active">Checkout</li>
 						</ul>
 					</div>
@@ -29,6 +29,8 @@
 		<div class="section">
 			<!-- container -->
 			<div class="container">
+      <form action="{% url 'store:checkout' %}" method="POST">
+        {% csrf_token %}
 				<!-- row -->
 				<div class="row">
 
@@ -37,7 +39,9 @@
 						<div class="billing-details">
 							<div class="section-title">
 								<h3 class="title">Billing address</h3>
-							</div>
+              </div>
+              <form>
+                
 							<div class="form-group">
 								<input class="input" type="text" name="first-name" placeholder="First Name">
 							</div>
@@ -194,11 +198,12 @@
 								I've read and accept the <a href="#">terms & conditions</a>
 							</label>
 						</div>
-						<a href="#" class="primary-btn order-submit">Place order</a>
+						<button type="submit" class="primary-btn order-submit">Place order</button>
 					</div>
 					<!-- /Order Details -->
 				</div>
-				<!-- /row -->
+        <!-- /row -->
+      </form>
 			</div>
 			<!-- /container -->
 		</div>
