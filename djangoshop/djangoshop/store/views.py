@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 
 
 def get_page(request, product_all_list):
-    paginator = Paginator(product_all_list, 2)
+    paginator = Paginator(product_all_list, 3)
 
     page_num = request.GET.get('page', 1)
     page_of_products = paginator.get_page(page_num)
@@ -17,7 +17,7 @@ def get_page(request, product_all_list):
     if paginator.num_pages - page_range[-1] >= 2:
         page_range.append("...")
     if page_range[0] != 1:
-        page_range.insert(0, 1) 
+        page_range.insert(0, 1)
         
     context = {}
     context['products'] = page_of_products.object_list
@@ -32,11 +32,13 @@ def index(request):
     product_list = Product.objects.all()
     new_product_list = Product.new_product.all()
     hot_product_list = Product.hot_product.all()
+
     return render(request, "index.html", locals())
 
 
 def product(request):
     product_list = Product.objects.all()
+
     return render(request, "product.html", locals())
 
 
@@ -44,16 +46,16 @@ def store(request):
     product_all_list = Product.objects.all()
     product_page = get_page(request, product_all_list)
     categories_list = Category.objects.all()
-    product_list = Product.objects.all()
 
     return render(request, "store.html", locals())
 
 
+def checkout(request):
+    return render(request, "checkout.html")
+
 
 def about(request):
     return render(request, "about.html")
-
-
 
 
 def search(request):
