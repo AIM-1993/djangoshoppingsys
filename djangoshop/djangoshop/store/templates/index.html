@@ -100,7 +100,7 @@
                       </div>
                     </div>
                     <div class="product-body">
-                      <p class="product-category">{{ new_product.categories.name }}</p>
+                      <p class="product-category">{{ new_product.get_first_categories }}</p>
                       <h3 class="product-name"><a href="{% url 'store:product' new_product.id %}">{{ new_product.name }}</a></h3>
                       <h4 class="product-price">${{ new_product.newprice }}<del class="product-old-price">${{ new_product.price }}</del></h4>
                       <div class="product-rating">
@@ -113,7 +113,7 @@
                       <div class="product-btns">
                         <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
                         <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                        <a href="{% url 'store:product' %}"><button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button></a>
+                        <button class="quick-view"><a href="{% url 'store:product' new_product.id %}"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></a></button>
                       </div>
                     </div>
                     <div class="add-to-cart">
@@ -229,8 +229,8 @@
                       </div>
                     </div>
                     <div class="product-body">
-                      <p class="product-category">{{ hot_product_list }}</p>
-                      <h3 class="product-name"><a href="{% url 'store:product' %}">{{ hot_product.name }}</a></h3>
+                      <p class="product-category">{{ hot_product.categories }}</p>
+                      <h3 class="product-name"><a href="{% url 'store:product' hot_product.id %}">{{ hot_product.name }}</a></h3>
                       <h4 class="product-price">${{ hot_product.newprice }} <del class="product-old-price">${{ hot_product.price }}</del></h4>
                       <div class="product-rating">
                         <i class="fa fa-star"></i>
@@ -242,7 +242,7 @@
                       <div class="product-btns">
                         <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
                         <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                        <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                        <button class="quick-view"><a href="{% url 'store:product' hot_product.id %}"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></a></button>
                       </div>
                     </div>
                     <div class="add-to-cart">

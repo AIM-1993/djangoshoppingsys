@@ -8,7 +8,6 @@ from .forms import CheckoutForm
 
 def get_page(request, product_all_list):
     paginator = Paginator(product_all_list, 3)
-
     page_num = request.GET.get('page', 1)
     page_of_products = paginator.get_page(page_num)
     current_page_num = page_of_products.number
@@ -36,8 +35,8 @@ def index(request):
     return render(request, "index.html", locals())
 
 
-def product(request, id=4):
-    product_list = Product.objects.get(pk=id)
+def product(request, id):
+    product_selected = Product.objects.get(pk=id)
     return render(request, "product.html", locals())
 
 
