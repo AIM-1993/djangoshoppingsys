@@ -36,9 +36,8 @@ def index(request):
     return render(request, "index.html", locals())
 
 
-def product(request):
-    product_list = Product.objects.all()
-
+def product(request, id=4):
+    product_list = Product.objects.get(pk=id)
     return render(request, "product.html", locals())
 
 
