@@ -183,7 +183,7 @@
 								</div>
 								<div class="product-body">
 									<p class="product-category">Category</p>
-									<h3 class="product-name"><a href="{% url 'store:product' %}">{{ hot_product.name }}</a></h3>
+									<h3 class="product-name"><a href="{% url 'store:product' hot_product.id %}">{{ hot_product.name }}</a></h3>
 									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
 								</div>
 							</div>
@@ -236,7 +236,7 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="{% url 'store:product' %}">{{ product.name }}</a></h3>
+										<h3 class="product-name"><a href="{% url 'store:product' product.id %}">{{ product.name }}</a></h3>
 										<h4 class="product-price">${{ product.newprice }} <del class="product-old-price">${{ product.price }}</del></h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>

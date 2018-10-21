@@ -40,12 +40,19 @@ def product(request, id):
     return render(request, "product.html", locals())
 
 
-def store(request):
-    product_all_list = Product.objects.all()
-    product_page = get_page(request, product_all_list)
+def store(request):    
     categories_list = Category.objects.all()
+    categories = Category.objects.filter(parent=None)
+    product_all_list = Product.objects.all()
+    product_all_list = get_page(request, product_all_list)
+    if request.method == "POST":
+        keyword = request.POST.get('keyword', '')
+        product_all_list = Product.objects.filter(name__contains=keyword)
+        product_page = get_page(request, product_all_list)
+        product_all_list = get_page(request, product_all_list)
+        return render(request, "store.html", locals())
 
-    return render(request, "store.html", locals())
+    return render(request, "store.html", {'product_page': product_all_list})
 
 
 def checkout(request):
@@ -62,10 +69,4 @@ def about(request):
     return render(request, "about.html")
 
 
-def search(request):
-    categories = Category.objects.filter(parent=None)
-    if request.method == "POST":
-        keyword = request.POST.get('keyword', '')
-        col_list = Product.objects.filter(name__contains=keyword)
-        col_list = get_page(request, col_list)
-        return render(request, "store.html", locals())
+
