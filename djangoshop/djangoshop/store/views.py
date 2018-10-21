@@ -1,7 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.core.paginator import Paginator
+from django.db.models import Prefetch
 from .models import Product, Category
 from .forms import CheckoutForm
+
 
 # Create your views here.
 
@@ -35,21 +37,20 @@ def index(request):
     return render(request, "index.html", locals())
 
 
-def product(request, id):
-    product_selected = Product.objects.get(pk=id)
+def product(request, product_id):
+    product_selected = Product.objects.get(pk=product_id)
     return render(request, "product.html", locals())
 
 
-def store(request):    
+def store(request):
     categories_list = Category.objects.all()
     categories = Category.objects.filter(parent=None)
     product_all_list = Product.objects.all()
     product_all_list = get_page(request, product_all_list)
     if request.method == "POST":
         keyword = request.POST.get('keyword', '')
-        product_all_list = Product.objects.filter(name__contains=keyword)
+        product_all_list = Product.objects.filter(name__contains=keyword, desc__contains=keyword)
         product_page = get_page(request, product_all_list)
-        product_all_list = get_page(request, product_all_list)
         return render(request, "store.html", locals())
 
     return render(request, "store.html", {'product_page': product_all_list})
@@ -67,6 +68,3 @@ def checkout(request):
 
 def about(request):
     return render(request, "about.html")
-
-
-
