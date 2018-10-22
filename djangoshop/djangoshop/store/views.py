@@ -47,9 +47,9 @@ def store(request):
     categories = Category.objects.filter(parent=None)
     product_all_list = Product.objects.all()
     product_all_list = get_page(request, product_all_list)
-    if request.method == "POST":
-        keyword = request.POST.get('keyword', '')
-        product_all_list = Product.objects.filter(name__contains=keyword, desc__contains=keyword)
+    if request.method == "GET":
+        keyword = request.GET.get('keyword', '')
+        product_all_list = Product.objects.filter(name__contains=keyword)
         product_page = get_page(request, product_all_list)
         return render(request, "store.html", locals())
 

@@ -75,7 +75,7 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                   <div class="header-search">
-                    <form action="/store/" method="POST">
+                    <form action="/store/" method="GET">
                       {% csrf_token %}
                       <select class="input-select">
                         {% for categories in categories_list %}
